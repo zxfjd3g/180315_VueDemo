@@ -10,11 +10,10 @@
 </template>
 
 <script>
-  import PubSub from 'pubsub-js'
-
   export default {
     props: {
       todo: Object,  // 指定属性名和属性值的类型
+      deleteTodo: Function,
       index: Number
     },
 
@@ -38,9 +37,7 @@
 
       deleteItem () {
         if(window.confirm('确认删除吗?')) {
-          // this.deleteTodo(this.index)
-          // 发布消息
-          PubSub.publish('deleteTodo', this.index)
+          this.deleteTodo(this.index)
         }
       }
     }

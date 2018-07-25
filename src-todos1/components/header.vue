@@ -1,17 +1,17 @@
 <template>
   <div class="todo-header">
-    <input type="text" placeholder="请输入你的任务名称，按回车键确认2" v-model="title" @keyup.enter="add"/>
+    <input type="text" placeholder="请输入你的任务名称，按回车键确认" v-model="title" @keyup.enter="add"/>
   </div>
 </template>
 
 <script>
   export default {
-    /*props: {
+    props: {
       addTodo: { // 指定属性名/属性值的类型/属性的必要性
         type: Function,
         required: true,
       }
-    },*/
+    },
     data () {
       return {
         title: ''
@@ -31,9 +31,7 @@
           complete: false
         }
         // 添加到todos
-        // this.addTodo(todo)
-        // 触发事件
-        this.$emit('addTodo', todo)
+        this.addTodo(todo)
 
         // 清除输入
         this.title = ''

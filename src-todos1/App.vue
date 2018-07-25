@@ -1,20 +1,15 @@
 <template>
   <div class="todo-container">
     <div class="todo-wrap">
-      <TodoHeader @addTodo="addTodo"/>
+      <TodoHeader :addTodo="addTodo"/>
       <!--<todo-header/>-->
-      <List :todos="todos"/>
-      <TodoFooter>
-        <input type="checkbox" v-model="checkAll" slot="all"/>
-        <span slot="size">已完成{{completeSize}} / 全部{{totalSize}}</span>
-        <button class="btn btn-danger" v-show="completeSize" @click="clearAllComplete" slot="clear">清除已完成任务</button>
-      </TodoFooter>
+      <List :todos="todos" :deleteTodo="deleteTodo"/>
+      <TodoFooter :todos="todos" :clearAllComplete="clearAllComplete" :selectAll="selectAll"/>
     </div>
   </div>
 </template>
 
 <script>
-  import PubSub from 'pubsub-js'
   import Header from './components/header.vue'
   import List from './components/list.vue'
   import Footer from './components/footer.vue'
@@ -28,32 +23,9 @@
       }
     },
 
-    computed: {
-      totalSize () {
-        return this.todos.length
-      },
-      completeSize () {
-        return this.todos.reduce((preSize, todo) => preSize+ (todo.complete?1:0), 0)
-      },
-
-      checkAll: {
-        get () {
-          return this.completeSize===this.totalSize && this.totalSize>0
-        },
-
-        set (value) { // value是boolean值
-          this.selectAll(value)
-        }
-      }
-    },
-
     mounted () {
       // 读取local中保存的todos (todos_key)
       this.todos = storageUtil.readTodos()
-      // 订阅消息(deleteTodo)
-      PubSub.subscribe('deleteTodo', (msg, index) => {
-        this.deleteTodo(index)
-      })
     },
 
     methods: {
