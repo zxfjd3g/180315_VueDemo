@@ -13,6 +13,7 @@
   import Header from './components/header.vue'
   import List from './components/list.vue'
   import Footer from './components/footer.vue'
+  import storageUtil from './utils/storageUtil'
 
   export default { // Vue中能写哪些配置这里就能写哪些
 
@@ -24,7 +25,7 @@
 
     mounted () {
       // 读取local中保存的todos (todos_key)
-      this.todos = JSON.parse(localStorage.getItem('todos_key' || '[]'))
+      this.todos = storageUtil.readTodos()
     },
 
     methods: {
@@ -50,10 +51,11 @@
     watch: {
       todos: {
         deep: true, // 尝试监视
-        handler: function (value) {// todos最新的值
+        /*handler: function (value) {// todos最新的值
           // 将value的json数据保存到local
-          localStorage.setItem('todos_key', JSON.stringify(value))
-        }
+          storageUtil.saveTodos(value)
+        }*/
+        handler: storageUtil.saveTodos
       }
     },
 
