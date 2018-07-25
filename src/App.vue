@@ -1,20 +1,18 @@
 <template>
-  <div class="container">
-    <Search/>
-    <users-main/>
+  <div>
+    <mt-button type="primary" style="width: 100%" @click="test">测试mintui</mt-button>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
-  import Search from './components/search.vue'
-  import Main from './components/main.vue'
 
+  import {Toast } from 'mint-ui';
   export default {
 
-    components: {
-      Search,
-      'users-main': Main
+    methods: {
+      test () {
+        Toast('响应点击!')
+      }
     }
   }
 </script>
