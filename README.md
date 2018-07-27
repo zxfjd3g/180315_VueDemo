@@ -60,9 +60,13 @@
     vue自定义事件
         子组件与父组件的通信方式
         用来取代function props
+          绑定事件监听: @eventName="fn"
+          触发/分发事件: this.$emit('eventName', data)
         不适合隔层组件和兄弟组件间的通信
     pubsub第三方库(消息订阅与发布)
         适合于任何关系的组件间通信
+        订阅消息监听: PubSub.subscribe('msgName', function (msgName, data){})
+        发布消息: PubSub.publish('msgName', data)
     slot
         通信是带数据的标签
         注意: 标签是在父组件中解析
