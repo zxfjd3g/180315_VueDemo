@@ -22,7 +22,6 @@
     },
 
     mounted () {
-      console.log(this)
       // 模拟从后台获取数据
       setTimeout(() => {// 一定要用箭头函数
         const messages = [
@@ -42,7 +41,6 @@
         this.$router.replace(`/home/message/detail/${id}`)
       }
     }
-
   }
 </script>
 

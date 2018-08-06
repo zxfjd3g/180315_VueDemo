@@ -13,7 +13,7 @@ import MessageDetail from '../pages/message-detail.vue'
 // 声明使用插件
 Vue.use(VueRouter)
 
-export default new VueRouter({
+const router = new VueRouter({
   // mode: 'history',
   // 所有路由
   routes: [
@@ -53,3 +53,16 @@ export default new VueRouter({
     }
   ]
 })
+
+// 注册一个全局前置守卫:
+router.beforeEach((to, from, next) => {
+  console.log('g beforeEach', to, from)
+  next()
+})
+
+// 注册一个全局后置守卫
+router.afterEach((to, from) => {
+  console.log('g afterEach', to, from)
+})
+
+export default router
