@@ -16,13 +16,17 @@
     beforeCreate() {
       console.log('about beforeCreate()')
     },
+    
+    mounted () {
+      console.log('mounted()')
+    },
     // 当前组件对象被创建前调用, 不能直接访问this(不是组件对象)
     // 但可以通过next(vm => {}), 在回调函数中访问组件对象
     beforeRouteEnter (to, from, next) {
       console.log('about准备进入了 beforeRouteEnter()', from)
       // next() // 只有执行next()才能真正进入当前组件
-      next(component => {
-        console.log(component.msg)
+      next(comp => {
+        console.log('about next compoent', comp.msg)
       })
     },
     // 当前组件对象将要更新前调用, 可以访问this
